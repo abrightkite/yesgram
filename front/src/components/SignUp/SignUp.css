@@ -35,3 +35,13 @@
   text-decoration: underline;
   color: grey;
 }
+
+.error-input {
+  border-color: red;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.8rem;
+  margin: 0;
+}
