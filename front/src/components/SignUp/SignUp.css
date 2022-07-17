@@ -1,0 +1,47 @@
+.sign-up-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 17rem;
+}
+
+.sign-up-input {
+  width: 100%;
+  height: 30px;
+  margin: 10px;
+}
+
+.sign-up-button {
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 17.5rem;
+}
+
+.move-to-signin {
+  color: grey;
+}
+
+.move-to-signin > .link {
+  text-decoration: underline;
+  color: grey;
+}
+
+.error-input {
+  border-color: red;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.8rem;
+  margin: 0;
+}
