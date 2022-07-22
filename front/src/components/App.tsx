@@ -1,5 +1,6 @@
 import React from "react";
 import RootNavigationContainer from "../routes/containers/RootNavigationContainer";
+import "../styles/common.css";
 
 function App() {
   return (
