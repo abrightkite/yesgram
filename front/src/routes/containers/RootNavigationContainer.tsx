@@ -6,7 +6,9 @@ const RootNavigationContainer = () => {
   const popUp = false;
   const token = "";
 
-  const checkToken = useCallback(() => {}, [token]);
+  const checkToken = useCallback(() => {
+    // jwt token api
+  }, [token]);
 
   useEffect(() => {
     checkToken();
