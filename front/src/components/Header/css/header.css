@@ -3,6 +3,7 @@
   height: 72px;
   background-color: #000;
   color: #fff;
+  position: absolute;
 }
 
 .header-inner {
@@ -18,12 +19,14 @@
 .logo button {
   font-size: 24px;
   font-weight: bold;
+  color: #fff;
 }
 
 .gnb button {
-  padding: 8px;
+  padding: 8px 12px;
   margin-right: 16px;
   border-radius: 4px;
+  color: #fff;
 }
 .gnb button:hover {
   background-color: #333;
