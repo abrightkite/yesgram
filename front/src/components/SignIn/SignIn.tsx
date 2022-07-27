@@ -17,7 +17,6 @@ const SignIn = () => {
   // 추후에 백엔드 작업이 완료되면 수정할 함수
   const fetchUser = (id: string, pw: string): boolean => {
     const users: User[] = [
-      { id: "kiryanchi", pw: "kiryanchi12!@" },
       { id: "test", pw: "test" },
       { id: "admin", pw: "admin" },
     ];
