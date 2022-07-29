@@ -1,6 +1,7 @@
 package knu.nono.yesgram.controller;
 
 import knu.nono.yesgram.dto.ErrorResponse;
+import knu.nono.yesgram.exception.ErrorCode;
 import knu.nono.yesgram.exception.ResponseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(ResponseException.class)
 	public ResponseEntity<ErrorResponse> handleCommonException(ResponseException ex) {
-		log.error("handleCommonException : {}", ex.getErrorCode());
-		return ErrorResponse.fromErrorCode(ex.getErrorCode());
+		ErrorCode errorCode = ex.getErrorCode();
+		
+		log.error("handleCommonException : {}", errorCode);
+		ErrorResponse body = ErrorResponse.fromErrorCode(errorCode);
+		
+		return ResponseEntity.status(errorCode.getHttpStatus()).body(body);
 	}
 }
