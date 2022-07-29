@@ -1,10 +1,16 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import PopUp from "../../components/common/PopUp/PopUp";
 import HomeContainer from "../../components/Home/containers/HomeContainer";
 import SingleGameContainer from "../../components/SingleGame/containers/SingleGameContainer";
 import SingleGameListContainer from "../../components/SingleGameList/containers/SingleGameListContainer";
+import { PopUpType } from "../../typedef/common/common.types";
 
-const HomeNavigation = () => {
+type Props = {
+  popUp: PopUpType;
+};
+
+const HomeNavigation = ({ popUp }: Props) => {
   return (
     <div>
       <Routes>
@@ -14,6 +20,7 @@ const HomeNavigation = () => {
           <Route path="list" element={<SingleGameListContainer />} />
         </Route>
       </Routes>
+      {popUp.isShown && <PopUp child={popUp.popUp} />}
     </div>
   );
 };
