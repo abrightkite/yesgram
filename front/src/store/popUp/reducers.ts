@@ -1,6 +1,5 @@
-import { JSX_TYPES } from "@babel/types";
 import { ReactNode } from "react";
-import { PopUpTypes } from "../../typedef/common/common.types";
+import { PopUpType } from "../../typedef/common/common.types";
 import { PopUpAction } from "./actions";
 import {
   CLEAR_POP_UP,
@@ -8,7 +7,7 @@ import {
   UPDATE_POP_UP_CHILD,
 } from "./modules/actionsTypes";
 
-export type PopUpState = PopUpTypes;
+export type PopUpState = PopUpType;
 
 const initialState = {
   popUp: null,
