@@ -46,16 +46,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 		return ResponseEntity.status(errorCode.getHttpStatus()).body(body);
 	}
-	
-	@Override
-	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ErrorCode errorCode = ErrorCode.NOT_FOUND;
-
-		log.error("{} : {}", getRequestPath(request), ex.getMessage());
-		ErrorResponse body = ErrorResponse.fromErrorCode(errorCode);
-
-		return ResponseEntity.status(errorCode.getHttpStatus()).body(body);
-	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
