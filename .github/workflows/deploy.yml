@@ -15,9 +15,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-          cache: npm
+          cache: yarn
+          cache-dependency-path: front/yarn.lock
 
-      - run: npm ci
+      - run: yarn install --frozen-lockfile
         working-directory: ${{ env.front_directory }}
 
       - run: npm run build
