@@ -21,7 +21,7 @@ jobs:
       - run: yarn install --frozen-lockfile
         working-directory: ${{ env.front_directory }}
 
-      - run: npm run build
+      - run: yarn build
         working-directory: ${{ env.front_directory }}
 
       - run: ls server/src/main/resources/static
