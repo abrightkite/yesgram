@@ -26,11 +26,16 @@ jobs:
           CI: false
         working-directory: ${{ env.front_directory }}
 
-      - run: ls server/src/main/resources/static
+      - run: |
+          git config --global user.email "deploy@gmail.com"
+          git config --global user.name "deploy"
+          git add .
+          git commit -m "set build data"
 
-      # - name: deploy to heroku
-      #   uses: akhileshns/heroku-deploy@v3.12.12
-      #   with:
-      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      #     heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-      #     heroku_email: ${{ secrets.HEROKU_EMAIL }}
+      - name: deploy to heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          appdir: "server"
