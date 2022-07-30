@@ -9,6 +9,3 @@
 
 ### VS Code ###
 .vscode/
-
-### Build ###
-server/src/main/resources/static/**
