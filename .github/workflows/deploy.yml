@@ -22,6 +22,8 @@ jobs:
         working-directory: ${{ env.front_directory }}
 
       - run: yarn build
+        env:
+          CI: false
         working-directory: ${{ env.front_directory }}
 
       - run: ls server/src/main/resources/static
