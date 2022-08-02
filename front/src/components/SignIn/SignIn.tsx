@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "./SignIn.css";
+import "./css/SignIn.css";
 
-interface User {
+type User = {
   id: string;
   pw: string;
-}
+};
 
 const SignIn = () => {
   const navigate = useNavigate();

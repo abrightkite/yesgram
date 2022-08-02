@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useInput from "./hooks/use-input";
-import "./SignUp.css";
+import "./css/SignUp.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
