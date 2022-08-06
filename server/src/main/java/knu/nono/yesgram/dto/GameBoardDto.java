@@ -1,7 +1,10 @@
 package knu.nono.yesgram.dto;
 
 import knu.nono.yesgram.domain.GameBoard;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GameBoardDetailResponse {
+public class GameBoardDto {
 	private Long id;
 	private int size;
 	private List<List<Integer>> board;
+	private boolean cleared;
 	
-	static public GameBoardDetailResponse fromEntity(GameBoard gameBoard) {
+	static public GameBoardDto fromEntity(GameBoard gameBoard) {
 		String answer = gameBoard.getAnswer();
 		int size = gameBoard.getSize();
 		List<List<Integer>> board = new ArrayList<>();
@@ -29,10 +33,11 @@ public class GameBoardDetailResponse {
 		}
 		
 		
-		return new GameBoardDetailResponse(
+		return new GameBoardDto(
 				gameBoard.getId(),
 				size,
-				board
+				board,
+				false
 		);
 	}
 }

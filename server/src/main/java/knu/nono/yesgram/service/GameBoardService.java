@@ -5,6 +5,7 @@ import knu.nono.yesgram.repository.GameBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,4 +18,7 @@ public class GameBoardService {
 		return gameBoardRepository.findById(id);
 	}
 	
+	public List<GameBoard> getGameBoards() {
+		return gameBoardRepository.findAll();
+	}
 }
