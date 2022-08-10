@@ -23,6 +23,8 @@ public class GameBoardListResponse {
 				.map(GameBoardDto::fromEntity)
 				.collect(Collectors.toList());
 		
+		boards.forEach(GameBoardDto::maskBoardIfNotCleared);
+		
 		return new GameBoardListResponse(boards);
 	}
 }

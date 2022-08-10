@@ -19,6 +19,12 @@ public class GameBoardDto {
 	private List<List<Integer>> board;
 	private boolean cleared;
 	
+	public void maskBoardIfNotCleared() {
+		if (!cleared) {
+			board = null;
+		}
+	}
+	
 	static public GameBoardDto fromEntity(GameBoard gameBoard) {
 		String answer = gameBoard.getAnswer();
 		int size = gameBoard.getSize();
