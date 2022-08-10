@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 public class GameBoardListResponse {
 	
 	private List<GameBoardDto> boards;
+	private int curPage;
+	private int totalPageCount;
 
 	static public GameBoardListResponse fromEntities(Page<GameBoard> gameBoards) {
 		List<GameBoardDto> boards = gameBoards
@@ -26,7 +28,11 @@ public class GameBoardListResponse {
 		
 		boards.forEach(GameBoardDto::maskBoardIfNotCleared);
 		
-		return new GameBoardListResponse(boards);
+		return new GameBoardListResponse(
+				boards, 
+				gameBoards.getNumber(), 
+				gameBoards.getTotalPages()
+		);
 	}
 }
 
