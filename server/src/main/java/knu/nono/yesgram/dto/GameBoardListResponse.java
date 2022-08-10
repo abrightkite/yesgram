@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ public class GameBoardListResponse {
 	
 	private List<GameBoardDto> boards;
 
-	static public GameBoardListResponse fromEntities(List<GameBoard> gameBoards) {
+	static public GameBoardListResponse fromEntities(Page<GameBoard> gameBoards) {
 		List<GameBoardDto> boards = gameBoards
 				.stream()
 				.map(GameBoardDto::fromEntity)

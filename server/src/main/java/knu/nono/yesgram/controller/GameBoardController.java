@@ -6,10 +6,11 @@ import knu.nono.yesgram.dto.GameBoardListResponse;
 import knu.nono.yesgram.exception.NotFoundGameBoardException;
 import knu.nono.yesgram.service.GameBoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -33,9 +34,10 @@ public class GameBoardController {
 	
 	@GetMapping
 	public ResponseEntity<GameBoardListResponse> getGameBoards(@RequestParam Optional<Integer> size,
-	                                                           @RequestParam Optional<Boolean> cleared) {
+	                                                           @RequestParam Optional<Boolean> cleared,
+	                                                           Pageable pageable) {
 		
-		List<GameBoard> gameBoards = gameBoardService.getGameBoards(size, cleared);
+		Page<GameBoard> gameBoards = gameBoardService.getGameBoards(size, cleared, pageable);
 		
 		GameBoardListResponse body = GameBoardListResponse.fromEntities(gameBoards);
 		return ResponseEntity.ok(body);
