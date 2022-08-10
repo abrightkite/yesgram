@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,4 +23,7 @@ public class MockUser {
 
 	@Column(nullable = false)
 	private String password;
+	
+	@OneToMany(mappedBy = "user")
+	private Set<ClearedGameBoard> clearedGameBoards = new HashSet<>();
 }
