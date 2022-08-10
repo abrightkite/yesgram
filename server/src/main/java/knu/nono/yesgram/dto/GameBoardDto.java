@@ -22,6 +22,18 @@ public class GameBoardDto {
 	static public GameBoardDto fromEntity(GameBoard gameBoard) {
 		String answer = gameBoard.getAnswer();
 		int size = gameBoard.getSize();
+		List<List<Integer>> board = parseBoard(answer, size);
+		boolean cleared = !gameBoard.getClearedUsers().isEmpty();
+		
+		return new GameBoardDto(
+				gameBoard.getId(),
+				size,
+				board,
+				cleared
+		);
+	}
+	
+	static private List<List<Integer>> parseBoard(String answer, int size) {
 		List<List<Integer>> board = new ArrayList<>();
 		
 		for (int i = 0; i < answer.length(); i += size) {
@@ -32,12 +44,6 @@ public class GameBoardDto {
 			board.add(row);
 		}
 		
-		
-		return new GameBoardDto(
-				gameBoard.getId(),
-				size,
-				board,
-				false
-		);
+		return board;
 	}
 }

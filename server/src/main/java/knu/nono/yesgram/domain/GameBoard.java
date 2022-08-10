@@ -3,6 +3,8 @@ package knu.nono.yesgram.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,4 +23,7 @@ public class GameBoard {
 
 	@Column(nullable = false)
 	private String answer;
+	
+	@OneToMany(mappedBy = "gameBoard")
+	private Set<ClearedGameBoard> clearedUsers = new HashSet<>();
 }

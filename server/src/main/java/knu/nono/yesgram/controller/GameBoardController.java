@@ -32,8 +32,10 @@ public class GameBoardController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<GameBoardListResponse> getGameBoards(@RequestParam Optional<Integer> size) {
-		List<GameBoard> gameBoards = gameBoardService.getGameBoards(size);
+	public ResponseEntity<GameBoardListResponse> getGameBoards(@RequestParam Optional<Integer> size,
+	                                                           @RequestParam Optional<Boolean> cleared) {
+		
+		List<GameBoard> gameBoards = gameBoardService.getGameBoards(size, cleared);
 		
 		GameBoardListResponse body = GameBoardListResponse.fromEntities(gameBoards);
 		return ResponseEntity.ok(body);
