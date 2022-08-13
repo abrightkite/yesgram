@@ -42,4 +42,17 @@ public class GameBoardController {
 		GameBoardListResponse body = GameBoardListResponse.fromEntities(gameBoards);
 		return ResponseEntity.ok(body);
 	}
+	
+	@GetMapping("/random")
+	public ResponseEntity<GameBoardDto> getRandom(@RequestParam Optional<Integer> size,
+	                                              @RequestParam Optional<Boolean> cleared) {
+		Optional<GameBoard> gameBoardOptional = gameBoardService.getRandomGameBoard(size, cleared);
+		
+		if (gameBoardOptional.isEmpty()) {
+			throw new NotFoundGameBoardException();
+		}
+
+		GameBoardDto body = GameBoardDto.fromEntity(gameBoardOptional.get());
+		return ResponseEntity.ok(body);
+	}
 }

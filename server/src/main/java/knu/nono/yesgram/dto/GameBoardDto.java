@@ -29,7 +29,7 @@ public class GameBoardDto {
 		String answer = gameBoard.getAnswer();
 		int size = gameBoard.getSize();
 		List<List<Integer>> board = parseBoard(answer, size);
-		boolean cleared = !gameBoard.getClearedUsers().isEmpty();
+		boolean cleared = gameBoard.isCleared();
 		
 		return new GameBoardDto(
 				gameBoard.getId(),
