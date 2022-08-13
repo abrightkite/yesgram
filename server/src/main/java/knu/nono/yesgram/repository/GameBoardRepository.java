@@ -38,14 +38,11 @@ public interface GameBoardRepository extends JpaRepository<GameBoard, Long> {
 	                                        Pageable pageable);
 	
 	@Query(value = "select * from game_boards as gb " +
-			"left join cleared_game_boards as cgb " +
-			"on cgb.user_id = :#{#user.id} and cgb.game_board_id = gb.id " +
 			"where (:size is null or gb.size = :size) " +
 			"order by rand() limit 1",
 			nativeQuery = true
 	)
-	Optional<GameBoard> findRandomGameBoard(@Param("size") Optional<Integer> size,
-	                              @Param("user") MockUser user);
+	Optional<GameBoard> findRandomGameBoard(@Param("size") Optional<Integer> size);
 
 	@Query(value = "select * from game_boards as gb " +
 			"join cleared_game_boards as cgb " +

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,15 +34,8 @@ public class GameBoardService {
 		Page<GameBoard> result;
  		if (cleared.isEmpty()) {
 			result = gameBoardRepository.findGameBoards(size, pageable);
-			List<GameBoard> clearedGameBoards = 
-					cgbRepository
-							.findAllByUserAndGameBoardIsIn(user, result.toList())
-							.stream()
-							.map(ClearedGameBoard::getGameBoard)
-							.collect(Collectors.toList());
-			
-			result.forEach(gameBoard -> gameBoard.setCleared(clearedGameBoards.contains(gameBoard)));
 
+		    setGameBoardClearedField(result.getContent(), user);
 		}
 		else if (cleared.get()) {
 			result = gameBoardRepository.findClearedGameBoards(size, user, pageable);
@@ -56,17 +50,41 @@ public class GameBoardService {
 		return result;
 	}
 	
-	public Optional<GameBoard> getRandom(Optional<Integer> size, Optional<Boolean> cleared) {
+	public Optional<GameBoard> getRandomGameBoard(Optional<Integer> size, Optional<Boolean> cleared) {
 		MockUser user = userRepository.getReferenceById(1L);
-
+		
+		Optional<GameBoard> result;
 		if (cleared.isEmpty()) {
-			return gameBoardRepository.findRandomGameBoard(size, user);
+			result = gameBoardRepository.findRandomGameBoard(size);
+			result.ifPresent(gameBoard -> setGameBoardClearedField(gameBoard, user));
 		}
 		else if (cleared.get()) {
-			return gameBoardRepository.findClearedRandomGameBoard(size, user);
+			result =  gameBoardRepository.findClearedRandomGameBoard(size, user);
+			result.ifPresent(gameBoard -> gameBoard.setCleared(true));
 		}
 		else {
-			return gameBoardRepository.findUnclearedRandomGameBoard(size, user);
+			result =  gameBoardRepository.findUnclearedRandomGameBoard(size, user);
+			result.ifPresent(gameBoard -> gameBoard.setCleared(false));
 		}
+		
+		return result;
+	}
+	
+	private void setGameBoardClearedField(List<GameBoard> targetGameBoards, MockUser user) {
+		List<GameBoard> clearedGameBoards =
+				cgbRepository
+						.findAllByUserAndGameBoardIsIn(user, targetGameBoards)
+						.stream()
+						.map(ClearedGameBoard::getGameBoard)
+						.collect(Collectors.toList());
+
+		targetGameBoards.forEach(gameBoard -> gameBoard.setCleared(clearedGameBoards.contains(gameBoard)));
+	}
+	
+	private void setGameBoardClearedField(GameBoard targetGameBoard, MockUser user) {
+		List<GameBoard> list = new ArrayList<>();
+		list.add(targetGameBoard);
+		
+		setGameBoardClearedField(list, user);
 	}
 }
