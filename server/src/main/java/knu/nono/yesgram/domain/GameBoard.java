@@ -1,13 +1,14 @@
 package knu.nono.yesgram.domain;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "game_boards")
 public class GameBoard {
@@ -17,11 +18,12 @@ public class GameBoard {
 	private Long id;
 	
 	@Column(nullable = false)
-	private Integer size;
+	private int size;
 
 	@Column(nullable = false)
 	private String answer;
 	
 	@Setter
+	@Transient
 	private boolean cleared;
 }
