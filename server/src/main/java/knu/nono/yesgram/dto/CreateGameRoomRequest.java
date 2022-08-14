@@ -1,6 +1,7 @@
 package knu.nono.yesgram.dto;
 
 import knu.nono.yesgram.common.GameType;
+import knu.nono.yesgram.domain.GameRoom;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,17 +22,26 @@ public class CreateGameRoomRequest {
 	@NotNull
 	private GameType type;
 	
-	@NotNull
+	@Min(10)
 	private int boardSize;
 
-	@NotNull
 	@Min(2)
 	@Max(8)
 	private int maxParticipant;
 
 	@NotNull
-	private boolean usePassword;
+	private Boolean usePassword;
 
 	@Size(min = 1, max = 20)
 	private String password;
+	
+	public GameRoom toEntity() {
+		return GameRoom.builder()
+				.title(title)
+				.type(type)
+				.boardSize(boardSize)
+				.maxParticipant(maxParticipant)
+				.password(usePassword ? password : null)
+				.build();
+	}
 }
